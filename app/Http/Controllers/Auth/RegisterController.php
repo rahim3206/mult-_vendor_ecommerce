@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\Admin\User_Registration;
+use App\Mail\User\UserRegistration;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -63,11 +66,25 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'role' => 0
         ]);
+
+
+            $mailData = [
+                'title' => 'Mail from Multi Vendor Ecommerce Platform',
+                'body' => 'Welcome to our Website.'
+            ];
+
+            Mail::to($user->email)->send(new UserRegistration($mailData));
+            $mailData2 = [
+                'title' => 'New User Register',
+                'body' =>   'User Email:'.$user->email.'<br>User Password:'.$data['password']
+            ];
+            Mail::to('rahim2110b@aptechgdn.net')->send(new User_Registration($mailData2));
+            return $user;
     }
 }
