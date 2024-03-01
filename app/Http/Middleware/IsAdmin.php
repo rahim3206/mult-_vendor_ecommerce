@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class IsAdmin
@@ -15,6 +16,21 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        return $next($request);
+        // Admin = 1
+        // Seller = 2
+        // User = 0
+
+        if (Auth::check())
+        {
+            if (Auth::user()->role == 1)
+            {
+                return $next($request);
+            }else{
+                return redirect('/')->with('error', 'You do not have admin access.');
+            }
+        }
+        else{
+            return redirect()->route('login');
+        }
     }
 }
