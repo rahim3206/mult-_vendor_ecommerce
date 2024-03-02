@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\Setting\GeneralController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -23,5 +24,10 @@ Auth::routes(['verify' => true]);
 
 Route::prefix('admin')->middleware('isAdmin')->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+    Route::prefix('settings')->group(function(){
+        Route::get('/general',[GeneralController::class, 'index'])->name('admin.settings.general');
+        Route::post('/general/update',[GeneralController::class, 'update'])->name('admin.settings.general.update');
+    });
 });
 
