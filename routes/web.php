@@ -21,4 +21,7 @@ Route::get('/', function () {
 
 Auth::routes(['verify' => true]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::prefix('admin')->middleware('isAdmin')->group(function () {
+    Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+});
+
