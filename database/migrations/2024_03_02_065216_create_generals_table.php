@@ -21,8 +21,8 @@ return new class extends Migration
             $table->string('site_city');
             $table->string('site_state');
             $table->string('site_postal_code');
-            $table->string('site_logo');
-            $table->string('site_favicon');
+            $table->string('site_logo')->nullable(true);
+            $table->string('site_favicon')->nullable(true);
             $table->timestamps();
         });
     }

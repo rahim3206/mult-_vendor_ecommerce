@@ -28,6 +28,8 @@ Route::prefix('admin')->middleware('isAdmin')->group(function () {
     Route::prefix('settings')->group(function(){
         Route::get('/general',[GeneralController::class, 'index'])->name('admin.settings.general');
         Route::post('/general/update',[GeneralController::class, 'update'])->name('admin.settings.general.update');
+        Route::get('/general/logo/delete',[GeneralController::class, 'logo_delete'])->name('admin.settings.general.logo');
+        Route::get('/general/favicon/delete',[GeneralController::class, 'favicon_delete'])->name('admin.settings.general.favicon');
     });
 });
 

@@ -10,8 +10,7 @@ class GeneralController extends Controller
 {
     public function index()
     {
-        $general = General::first();
-        return view('admin.settings.general.index',compact('general'));
+        return view('admin.settings.general.index');
     }
     public function update(Request $request)
     {
@@ -36,12 +35,34 @@ class GeneralController extends Controller
         $general->site_city = $request->site_city;
         $general->site_postal_code = $request->site_postal;
         if(isset($request->site_logo)){
-        $general->site_logo = 'dfg';
+
+            $site_logo = $request->file('site_logo');
+            $ext = rand().".".$site_logo->getClientOriginalName();
+            $site_logo->move("settings/site/",$ext);
+            $general->site_logo = $ext;
         }
         if(isset($request->site_favicon)){
-            $general->site_favicon = 'gfhgf';
+            $site_favicon = $request->file('site_favicon');
+            $ext = rand().".".$site_favicon->getClientOriginalName();
+            $site_favicon->move("settings/site/",$ext);
+            $general->site_favicon = $ext;
         }
         $general->update();
         return redirect()->back()->with('success', 'General settings has been updated successfully');
+    }
+
+    public function logo_delete()
+    {
+        $general = General::first();
+        $general->site_logo = null;
+        $general->update();
+        return redirect()->back()->with('success', 'Logo has been deleted successfully');
+    }
+    public function favicon_delete()
+    {
+        $general = General::first();
+        $general->site_favicon = null;
+        $general->update();
+        return redirect()->back()->with('success', 'Favicon has been deleted successfully');
     }
 }
