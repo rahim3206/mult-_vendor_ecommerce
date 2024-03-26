@@ -75,6 +75,12 @@
                                     <span class="sidenav-normal"> General </span>
                                 </a>
                             </li>
+                            <li class="nav-item ">
+                                <a class="nav-link " href="{{ route('admin.settings.smtp') }}">
+                                    <span class="sidenav-mini-icon"> S </span>
+                                    <span class="sidenav-normal"> SMTP Setup </span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>
