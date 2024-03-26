@@ -20,9 +20,15 @@ class SmtpController extends Controller
             'smtp_encryption' => 'required',
             'smtp_username' => 'required',
             'smtp_password' => 'required',
+            'smtp_from_name' => 'required',
+            'smtp_from_email' => 'required',
+            'smtp_transport' => 'required',
             'status' => 'required',
         ]);
         $smtp = SmtpSetup::first();
+        $smtp->smtp_from_name = $request->smtp_from_name;
+        $smtp->smtp_from_email = $request->smtp_from_email;
+        $smtp->smtp_transport = $request->smtp_transport;
         $smtp->smtp_host = $request->smtp_host;
         $smtp->smtp_port = $request->smtp_port;
         $smtp->smtp_encryption = $request->smtp_encryption;

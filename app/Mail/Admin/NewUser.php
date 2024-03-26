@@ -9,18 +9,18 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class User_Registration extends Mailable
+class NewUser extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $mailData2;
+    public $adminMailData;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($mailData2)
+    public function __construct($adminMailData)
     {
-        $this->mailData2 = $mailData2;
+        $this->adminMailData = $adminMailData;
     }
 
     /**
@@ -29,7 +29,7 @@ class User_Registration extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'User Registration',
+            subject: 'New User',
         );
     }
 

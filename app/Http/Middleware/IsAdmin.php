@@ -16,21 +16,14 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // Admin = 1
-        // Seller = 2
-        // User = 0
 
-        if (Auth::check())
+
+        if (Auth::guard('admin')->check())
         {
-            if (Auth::user()->role == 1)
-            {
-                return $next($request);
-            }else{
-                return redirect('/')->with('error', 'You do not have admin access.');
-            }
+            return $next($request);
         }
         else{
-            return redirect()->route('login');
+            return redirect()->route('admin.login.get');
         }
     }
 }

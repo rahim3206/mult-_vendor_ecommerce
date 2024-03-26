@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Mail\Admin\User_Registration;
 use App\Mail\User\UserRegistration;
+use App\Models\Admin\Setting\SmtpSetup;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
@@ -73,18 +73,16 @@ class RegisterController extends Controller
             'role' => 0
         ]);
 
+        // $smtp = SmtpSetup::first();
+        // if($smtp && $smtp->status == 1)
+        // {
+        //     $mailData = [
+        //         'title' => 'Mail from Multi Vendor Ecommerce Platform',
+        //         'body' => 'Welcome to our Website.'
+        //     ];
 
-            $mailData = [
-                'title' => 'Mail from Multi Vendor Ecommerce Platform',
-                'body' => 'Welcome to our Website.'
-            ];
-
-            Mail::to($user->email)->send(new UserRegistration($mailData));
-            $mailData2 = [
-                'title' => 'New User Register',
-                'body' =>   'User Email:'.$user->email.'<br>User Password:'.$data['password']
-            ];
-            Mail::to('rahim2110b@aptechgdn.net')->send(new User_Registration($mailData2));
+        //     Mail::to($user->email)->send(new UserRegistration($mailData));
+        // }
             return $user;
     }
 }

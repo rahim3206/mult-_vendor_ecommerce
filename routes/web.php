@@ -1,8 +1,5 @@
 <?php
 
-use App\Http\Controllers\Admin\Setting\GeneralController;
-use App\Http\Controllers\Admin\Setting\SmtpController;
-use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -22,21 +19,4 @@ Route::get('/', function () {
 });
 
 Auth::routes(['verify' => true]);
-
-Route::prefix('admin')->middleware('isAdmin')->group(function () {
-    Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-    Route::prefix('settings')->group(function(){
-        // General Setting Routes
-        Route::get('/general',[GeneralController::class, 'index'])->name('admin.settings.general');
-        Route::post('/general/update',[GeneralController::class, 'update'])->name('admin.settings.general.update');
-        Route::get('/general/logo/delete',[GeneralController::class, 'logo_delete'])->name('admin.settings.general.logo');
-        Route::get('/general/favicon/delete',[GeneralController::class, 'favicon_delete'])->name('admin.settings.general.favicon');
-
-        // General SMTP Routes
-        Route::get('/smtp',[SmtpController::class, 'index'])->name('admin.settings.smtp');
-        Route::post('/smtp/update',[SmtpController::class, 'update'])->name('admin.settings.smtp.update');
-
-    });
-});
 

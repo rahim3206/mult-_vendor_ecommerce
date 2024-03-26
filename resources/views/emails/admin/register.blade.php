@@ -4,8 +4,8 @@
     <title>ItsolutionStuff.com</title>
 </head>
 <body>
-    <h1>{{ $mailData2['title'] }}</h1>
-    <p>{{ $mailData2['body'] }}</p>
+    <h1>dfgdfg</h1>
+    <p>dfgdfg</p>
 
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
     tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,

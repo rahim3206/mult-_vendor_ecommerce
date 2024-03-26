@@ -18,6 +18,9 @@ return new class extends Migration
             $table->string('smtp_username')->nullable();
             $table->string('smtp_password')->nullable();
             $table->string('smtp_encryption')->nullable();
+            $table->string('smtp_transport')->nullable();
+            $table->string('smtp_from_email')->nullable();
+            $table->string('smtp_from_name')->nullable();
             $table->string('status')->nullable();
             $table->timestamps();
         });

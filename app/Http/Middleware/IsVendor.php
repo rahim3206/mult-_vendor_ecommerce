@@ -20,17 +20,12 @@ class IsVendor
         // Seller = 2
         // User = 0
 
-        if (Auth::check())
+        if (Auth::guard('vendor')->check())
         {
-            if (Auth::user()->role == 2)
-            {
-                return $next($request);
-            }else{
-                return redirect('/')->with('error', 'You do not have seller access.');
-            }
+            return $next($request);
         }
         else{
-            return redirect()->route('login');
+            return redirect()->route('vendor.login.get');
         }
     }
 }
