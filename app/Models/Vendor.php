@@ -11,4 +11,10 @@ use Laravel\Sanctum\HasApiTokens;
 class Vendor extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
+
+
+    public function catrgories()
+    {
+        return $this->hasMany(Category::class);
+    }
 }
