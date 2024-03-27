@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Setting\GeneralController;
 use App\Http\Controllers\Admin\Setting\SmtpController;
+use App\Http\Controllers\Admin\VendorController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -10,8 +11,16 @@ Route::get('admin/login', [LoginController::class, 'index'])->name('admin.login.
 Route::post('admin/login', [LoginController::class, 'login'])->name('admin.login');
 Route::post('admin/logout', [LoginController::class, 'logout'])->name('admin.logout');
 
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware('isAdmin')->group(function () {
+
     Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+    Route::name('admin.')->group(function () {
+
+        Route::resource('vendors', VendorController::class);
+        Route::get('change_status',[VendorController::class, 'change_status'])->name('vendors.change_status');
+    });
+
 
     Route::prefix('settings')->group(function(){
         // General Setting Routes

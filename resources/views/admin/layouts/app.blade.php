@@ -50,7 +50,7 @@
         <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" href="./pages/dashboard.html">
+                    <a class="nav-link {{ Request::is('admin/dashboard') ? 'active' : '' }}" href="{{ url('admin/dashboard') }}">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
@@ -63,20 +63,46 @@
                         aria-controls="pagesExamples" role="button" aria-expanded="false">
                         <div
                             class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
+                            <i class="fa fa-user text-secondary text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Vendors</span>
+                    </a>
+                    <div class="collapse {{ Request::is('admin/vendors') ? 'show' : '' }} {{ Request::is('admin/vendors/*') ? 'show' : '' }}" id="pagesExamples" style="">
+                        <ul class="nav ms-4">
+                            <li class="nav-item {{ Request::is('admin/vendors') ? 'active' : '' }}">
+                                <a class="nav-link " href="{{ route('admin.vendors.index') }}">
+                                    <span class="sidenav-mini-icon"> P </span>
+                                    <span class="sidenav-normal"> All Vendors </span>
+                                </a>
+                            </li>
+                            <li class="nav-item {{ Request::is('admin/vendors/create') ? 'active' : '' }} ">
+                                <a class="nav-link " href="{{ route('admin.vendors.create') }}">
+                                    <span class="sidenav-mini-icon"> S </span>
+                                    <span class="sidenav-normal"> Create Vendor </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#settings" class="nav-link collapsed"
+                        aria-controls="pagesExamples" role="button" aria-expanded="false">
+                        <div
+                            class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
                             <i class="fa fa-cog text-secondary text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Settings</span>
                     </a>
-                    <div class="collapse" id="pagesExamples" style="">
+                    <div class="collapse {{ Request::is('admin/settings/*') ? 'show' : '' }}" id="settings" style="">
                         <ul class="nav ms-4">
                             <li class="nav-item ">
-                                <a class="nav-link " href="{{ route('admin.settings.general') }}">
+                                <a class="nav-link {{ Request::is('admin/settings/general') ? 'active' : '' }}" href="{{ route('admin.settings.general') }}">
                                     <span class="sidenav-mini-icon"> P </span>
                                     <span class="sidenav-normal"> General </span>
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link " href="{{ route('admin.settings.smtp') }}">
+                                <a class="nav-link  {{ Request::is('admin/settings/smtp') ? 'active' : '' }}" href="{{ route('admin.settings.smtp') }}">
                                     <span class="sidenav-mini-icon"> S </span>
                                     <span class="sidenav-normal"> SMTP Setup </span>
                                 </a>
@@ -169,7 +195,7 @@
                         <li class="nav-item d-flex align-items-center">
                             <a href="javascript:;" class="nav-link text-white font-weight-bold px-0">
                                 <i class="fa fa-user me-sm-1"></i>
-                                <span class="d-sm-inline d-none">{{ Auth::user()->name ?? 'Guest' }}</span>
+                                <span class="d-sm-inline d-none">{{ Auth::guard('admin')->name ?? 'Guest' }}</span>
                             </a>
                         </li>
                         <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
@@ -349,11 +375,13 @@
         </div>
     </div>
     <!--   Core JS Files   -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="{{ asset('admin_assets/js/core/popper.min.js') }}"></script>
     <script src="{{ asset('admin_assets/js/core/bootstrap.min.js') }}"></script>
     <script src="{{ asset('admin_assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ asset('admin_assets/js/plugins/smooth-scrollbar.min.js') }}"></script>
     <script src="{{ asset('admin_assets/js/plugins/chartjs.min.js') }}"></script>
+    <script src="{{ asset('admin_assets/js/custom.js') }}"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script>
         var ctx1 = document.getElementById("chart-line").getContext("2d");
