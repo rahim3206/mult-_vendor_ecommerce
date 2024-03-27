@@ -14,7 +14,7 @@ class VendorController extends Controller
      */
     public function index()
     {
-        $data['vendors'] = Vendor::orderByDesc('id')->get();
+        $data['vendors'] = Vendor::orderByDesc('id')->simplePaginate(10);
         return view('admin.vendor.index',$data);
     }
 

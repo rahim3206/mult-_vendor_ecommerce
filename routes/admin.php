@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Setting\GeneralController;
 use App\Http\Controllers\Admin\Setting\SmtpController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\VendorController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,8 +18,13 @@ Route::prefix('admin')->middleware('isAdmin')->group(function () {
 
     Route::name('admin.')->group(function () {
 
+        // Vendor Routes
         Route::resource('vendors', VendorController::class);
         Route::get('change_status',[VendorController::class, 'change_status'])->name('vendors.change_status');
+
+        // Customer Routes
+        Route::resource('customers', UserController::class);
+
     });
 
 

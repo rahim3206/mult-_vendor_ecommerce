@@ -1,5 +1,5 @@
 @extends('admin.layouts.app')
-@section('title', 'All Vendor')
+@section('title', 'All Customers')
 @section('admin_content')
     <div class="container-fluid py-4">
         <div class="row">
@@ -8,10 +8,10 @@
                     <div class="card-header pb-0">
                         <div class="d-flex justify-content-between w-100">
                             <div>
-                                <h6>Vendors Table</h6>
+                                <h6>Customer Table</h6>
                             </div>
                             <div>
-                                <a class="btn btn-primary btn-sm" href="{{ route('admin.vendors.create') }}"> <i class="fa fa-plus"></i> Add Vendor</a>
+                                <a class="btn btn-primary btn-sm" href="{{ route('admin.customers.create') }}"> <i class="fa fa-plus"></i> Add Customer</a>
                             </div>
                         </div>
                     </div>
@@ -23,19 +23,12 @@
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Name</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Store Name</th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Status</th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Products</th>
-                                        <th class="text-secondary opacity-7"></th>
+                                            Phone Number</th>
                                     </tr>
                                 </thead>
                                 <tbody>
 
-                                    @foreach ($vendors as $vendor)
+                                    @foreach ($customers as $customer)
                                         <tr>
                                             <td>
                                                 <div class="d-flex px-2 py-1">
@@ -44,30 +37,20 @@
                                                             alt="user1">
                                                     </div>
                                                     <div class="d-flex flex-column justify-content-center">
-                                                        <h6 class="mb-0 text-sm">{{ $vendor->name }}</h6>
-                                                        <p class="text-xs text-secondary mb-0">{{ $vendor->email }}</p>
+                                                        <h6 class="mb-0 text-sm">{{ $customer->name }}</h6>
+                                                        <p class="text-xs text-secondary mb-0">{{ $customer->email }}</p>
                                                     </div>
                                                 </div>
                                             </td>
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0">Manager</p>
-                                                <p class="text-xs text-secondary mb-0">Organization</p>
-                                            </td>
-                                            <td class="align-middle text-center text-sm">
-                                                <select name="status" class="changeVendorStatus {{ $vendor->status == '1' ? 'bg-gradient-success' : 'bg-gradient-danger' }}" data-id="{{ $vendor->id }}" data-url="{{ route('admin.vendors.change_status') }}">
-                                                    <option value="1" {{ $vendor->status == '1' ? 'selected' : '' }}>Approaved</option>
-                                                    <option value="0" {{ $vendor->status == '0' ? 'selected' : '' }}>Pending</option>
-                                                </select>
-                                            </td>
-                                            <td class="align-middle text-center">
-                                                <span class="text-secondary text-xs font-weight-bold">10</span>
+                                                <p class="text-xs font-weight-bold mb-0">{{ $customer->phone }}</p>
                                             </td>
                                             <td class="align-middle d-flex">
-                                                <a href="{{ route('admin.vendors.edit', $vendor->id) }}" class="btn text-secondary font-weight-bold text-xs"
+                                                <a href="{{ route('admin.customers.edit', $customer->id) }}" class="btn text-secondary font-weight-bold text-xs"
                                                     data-toggle="tooltip" data-original-title="Edit user">
                                                     Edit
                                                 </a>&nbsp;
-                                                <form action="{{ route('admin.vendors.destroy', $vendor->id) }}" method="post">
+                                                <form action="{{ route('admin.customers.destroy', $customer->id) }}" method="post">
                                                 @csrf
                                                 @method('DELETE')
                                                     <button type="submit" class="text-danger font-weight-bold text-xs btn"
@@ -83,9 +66,10 @@
                             </table>
                             <div class="w-100 d-flex justify-content-end p-3">
                                 <div>
-                                    {{ $vendors->links() }}
+                                    {{ $customers->links() }}
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
