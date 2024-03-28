@@ -138,6 +138,32 @@
                     </div>
                 </li>
                 <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#products" class="nav-link collapsed"
+                        aria-controls="pagesExamples" role="button" aria-expanded="false">
+                        <div
+                            class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
+                            <i class="fa fa-user text-secondary text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Sub Categories</span>
+                    </a>
+                    <div class="collapse {{ Request::is('admin/sub_categories') ? 'show' : '' }} {{ Request::is('admin/sub_categories/*') ? 'show' : '' }}" id="products" style="">
+                        <ul class="nav ms-4">
+                            <li class="nav-item {{ Request::is('admin/sub_categories') ? 'active' : '' }}">
+                                <a class="nav-link " href="{{ route('admin.sub_categories.index') }}">
+                                    <span class="sidenav-mini-icon"> P </span>
+                                    <span class="sidenav-normal"> All Sub Categories </span>
+                                </a>
+                            </li>
+                            <li class="nav-item {{ Request::is('admin/sub_categories/create') ? 'active' : '' }} ">
+                                <a class="nav-link " href="{{ route('admin.sub_categories.create') }}">
+                                    <span class="sidenav-mini-icon"> S </span>
+                                    <span class="sidenav-normal"> Add Sub Category </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#settings" class="nav-link collapsed"
                         aria-controls="pagesExamples" role="button" aria-expanded="false">
                         <div
