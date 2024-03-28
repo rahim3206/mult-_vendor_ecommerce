@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\Auth\LoginController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\Setting\GeneralController;
 use App\Http\Controllers\Admin\Setting\SmtpController;
 use App\Http\Controllers\Admin\UserController;
@@ -24,6 +25,10 @@ Route::prefix('admin')->middleware('isAdmin')->group(function () {
 
         // Customer Routes
         Route::resource('customers', UserController::class);
+
+        //Category Route
+        Route::resource('categories', CategoryController::class);
+
 
     });
 

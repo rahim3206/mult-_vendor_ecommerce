@@ -1,25 +1,25 @@
-@extends('vendor.layouts.app')
-@section('title', 'Create Categories')
-@section('vendor_content')
+@extends('admin.layouts.app')
+@section('title', 'Edit Categories')
+@section('admin_content')
 <div class="container-fluid py-4">
     <div class="row">
       <div class="col-md-12">
         <div class="card">
           <div class="card-header pb-0">
             <div class="d-flex align-items-center">
-              <p class="mb-0">Create Category</p>
+              <p class="mb-0">Edit Category</p>
             </div>
           </div>
           <div class="card-body">
 
-            <form action="{{ route('vendor.categories.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.categories.update', $category->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                @method('POST')
+                @method('PUT')
                 <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
                     <label for="example-text-input" class="form-control-label">Title</label>
-                    <input class="form-control" type="text" placeholder="Category Name" name="title">
+                    <input class="form-control" type="text" placeholder="Category Name" name="title" value="{{ $category->title }}">
                     @error('title')
                         <span class="validated_txt">{{ $message }}</span>
                     @enderror

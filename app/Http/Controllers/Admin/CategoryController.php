@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Vendor;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
@@ -14,9 +14,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $auth_id = Auth::guard('vendor')->user()->id;
-        $data['categories'] = Category::where('vendor_id',$auth_id)->with('sub_categories')->simplePaginate(10);
-        return view('vendor.category.index',$data);
+        $data['categories'] = Category::with('sub_categories')->simplePaginate(10);
+        return view('admin.category.index',$data);
     }
 
     /**
@@ -24,7 +23,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('vendor.category.create');
+        return view('admin.category.create');
     }
 
     /**
@@ -36,13 +35,12 @@ class CategoryController extends Controller
             'title'=>'required | unique:categories',
         ]);
 
-        $auth_id = Auth::guard('vendor')->user()->id;
 
         $category = new Category();
         $category->title = $request->title;
-        $category->vendor_id = $auth_id;
+        $category->vendor_id = null;
         $category->save();
-        return redirect()->route('vendor.categories.index')->with('success', 'Category has been created successfully');
+        return redirect()->route('admin.categories.index')->with('success', 'Category has been created successfully');
     }
 
     /**
@@ -59,7 +57,7 @@ class CategoryController extends Controller
     public function edit(string $id)
     {
         $data['category'] = Category::find($id);
-        return view('vendor.category.edit',$data);
+        return view('admin.category.edit',$data);
     }
 
     /**
@@ -71,12 +69,11 @@ class CategoryController extends Controller
             'title'=>'required | unique:categories',
         ]);
 
-        $auth_id = Auth::guard('vendor')->user()->id;
 
         $category = Category::find($id);
         $category->title = $request->title;
         $category->update();
-        return redirect()->route('vendor.categories.index')->with('success', 'Category has been updated successfully');
+        return redirect()->route('admin.categories.index')->with('success', 'Category has been updated successfully');
     }
 
     /**

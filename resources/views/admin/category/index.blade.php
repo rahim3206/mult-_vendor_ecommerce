@@ -1,6 +1,6 @@
-@extends('vendor.layouts.app')
+@extends('admin.layouts.app')
 @section('title', 'All Categories')
-@section('vendor_content')
+@section('admin_content')
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12">
@@ -11,7 +11,7 @@
                                 <h6>Categories Table</h6>
                             </div>
                             <div>
-                                <a class="btn btn-primary btn-sm" href="{{ route('admin.customers.create') }}"> <i class="fa fa-plus"></i> Add Customer</a>
+                                <a class="btn btn-primary btn-sm" href="{{ route('admin.categories.create') }}"> <i class="fa fa-plus"></i> Add Category</a>
                             </div>
                         </div>
                     </div>
@@ -50,11 +50,11 @@
                                                 @endforeach
                                             </td>
                                             <td class="align-middle d-flex">
-                                                <a href="{{ route('vendor.categories.edit', $category->id) }}" class="btn text-secondary font-weight-bold text-xs"
+                                                <a href="{{ route('admin.categories.edit', $category->id) }}" class="btn text-secondary font-weight-bold text-xs"
                                                     data-toggle="tooltip" data-original-title="Edit user">
                                                     Edit
                                                 </a>&nbsp;
-                                                <form action="{{ route('vendor.categories.destroy', $category->id) }}" method="post">
+                                                <form action="{{ route('admin.categories.destroy', $category->id) }}" method="post">
                                                 @csrf
                                                 @method('DELETE')
                                                     <button type="submit" class="text-danger font-weight-bold text-xs btn"

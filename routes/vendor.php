@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\Vendor\Auth\LoginController;
 use App\Http\Controllers\Vendor\Auth\RegisterController;
-use App\Http\Controllers\Vendor\CategoryController;
 use App\Http\Controllers\Vendor\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -28,7 +27,7 @@ Route::prefix('vendor')->middleware('isVendor')->group(function () {
     Route::get('/dashboard', [HomeController::class, 'index'])->name('vendor.index');
 
     Route::name('vendor.')->group(function () {
-        Route::resource('categories', CategoryController::class);
+        
     });
 });
 
